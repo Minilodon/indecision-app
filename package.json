@@ -1,0 +1,24 @@
+{
+  "name": "indecision-app",
+  "version": "1.0.0",
+  "description": "Primeiro programa do curso base de React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minilodon/indecision-app.git"
+  },
+  "keywords": [
+    "React",
+    "TDD",
+    "JS"
+  ],
+  "author": "Pedro Soares <pedro.soareszl99@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Minilodon/indecision-app/issues"
+  },
+  "homepage": "https://github.com/Minilodon/indecision-app#readme"
+}
