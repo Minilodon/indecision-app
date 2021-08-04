@@ -4,6 +4,8 @@
   "description": "Primeiro programa do curso base de React",
   "main": "index.js",
   "scripts": {
+    "react": "babel src --out-dir public/lib --presets=@babel/preset-react --watch",
+    "react-watch":"babel src --out-dir public/lib --presets=@babel/preset-react --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/Minilodon/indecision-app/issues"
   },
-  "homepage": "https://github.com/Minilodon/indecision-app#readme"
+  "homepage": "https://github.com/Minilodon/indecision-app#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.9",
+    "@babel/preset-react": "^7.14.5"
+  }
 }
