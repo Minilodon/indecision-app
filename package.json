@@ -6,6 +6,7 @@
   "scripts": {
     "react": "babel src --out-dir public/lib --presets=@babel/preset-react --watch",
     "react-watch":"babel src --out-dir public/lib --presets=@babel/preset-react --watch",
+    "react-watch-playground":"babel src/playground --out-dir public/lib/playground --presets=@babel/preset-react --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
