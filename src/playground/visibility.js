@@ -1,35 +1,31 @@
-let STATUS = 0;
-const APP_IP = document.getElementById("app");
-
-const MOSTRAR = () => {
-    STATUS = 1;
-    RENDERIZAR_CONDICIONAL();
-};
-
-const ESCONDER = () => {
-    STATUS = 0;
-    RENDERIZAR_CONDICIONAL();
-};
-
-let PROGRAMA;
-
-const RENDERIZAR_CONDICIONAL = () => {
-    if (STATUS === 0) {
-        PROGRAMA = 
-        <div>
-        <h1>Visibility App</h1>
-        <button onClick={MOSTRAR}>Show details</button>
-        </div>
+class VisibilityToggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleToggleVisibility = this.handleToggleVisibility.bind(this);
+        this.state = {
+            visibility : false
+        }
     }
-    else {
-        PROGRAMA = 
-        <div>
-        <h1>Visibility App</h1>
-        <button onClick={ESCONDER}>Hide details</button>
-        <p>Eu estava escondido!</p>
-        </div>
+
+    handleToggleVisibility() {
+        this.setState((actualState) => {
+            return {
+                visibility : !actualState.visibility
+            }
+        })
     }
-    ReactDOM.render(PROGRAMA,APP_IP);
+    render() {
+        return (
+            <div>
+                <h1>Visibility Toggle</h1>
+                <button onClick={this.handleToggleVisibility}>{this.state.visibility ? "Hide details" : "Show details"}</button>
+                {this.state.visibility && (
+                    <div>
+                        <p>Eu estava escondido!</p>
+                    </div>
+                )}
+            </div>
+        )
+    }
 }
-
-RENDERIZAR_CONDICIONAL();
+ReactDOM.render(<VisibilityToggle />, document.getElementById("app"));

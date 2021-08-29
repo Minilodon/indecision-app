@@ -1,33 +1,50 @@
 "use strict";
 
-let count = 0;
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddOne = this.handleAddOne.bind(this);
+    this.handleMinusOne = this.handleMinusOne.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+    this.state = {
+      count: 0
+    };
+  }
 
-const CLICADO = () => {
-  count++;
-  RENDER();
-};
+  handleAddOne() {
+    this.setState(prevState => {
+      return {
+        count: prevState.count + 1
+      };
+    });
+  }
 
-const minusOne = () => {
-  count--;
-  RENDER();
-};
+  handleMinusOne() {
+    this.setState(prevState => {
+      return {
+        count: prevState.count - 1
+      };
+    });
+  }
 
-const reset = () => {
-  count = 0;
-  RENDER();
-};
+  handleReset() {
+    this.setState(() => {
+      return {
+        count: 0
+      };
+    });
+  }
 
-const APP_IP = document.getElementById("app");
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Count: ", this.state.count), /*#__PURE__*/React.createElement("button", {
+      onClick: this.handleAddOne
+    }, "+1"), /*#__PURE__*/React.createElement("button", {
+      onClick: this.handleMinusOne
+    }, "-1"), /*#__PURE__*/React.createElement("button", {
+      onClick: this.handleReset
+    }, "Reset"));
+  }
 
-const RENDER = () => {
-  const TEMPLATE2 = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Count: ", count), /*#__PURE__*/React.createElement("button", {
-    onClick: CLICADO
-  }, "+1"), /*#__PURE__*/React.createElement("button", {
-    onClick: minusOne
-  }, "-1"), /*#__PURE__*/React.createElement("button", {
-    onClick: reset
-  }, "reset"));
-  ReactDOM.render(TEMPLATE2, APP_IP);
-};
+}
 
-RENDER();
+ReactDOM.render( /*#__PURE__*/React.createElement(Counter, null), document.getElementById("app"));

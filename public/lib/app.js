@@ -1,53 +1,128 @@
 "use strict";
 
-console.log("App.js is running");
-const APP_IP = document.getElementById("app");
-const TITLES = {
-  MAIN: "Indecision App",
-  SUB: "Put your life in the hands of a computer",
-  OPTIONS: []
-};
-
-const OnFormSubmit = e => {
-  e.preventDefault();
-  const option = e.target.elements.option.value;
-
-  if (option) {
-    TITLES.OPTIONS.push(option);
-    e.target.elements.option.value = '';
+class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.state = {
+      options: []
+    };
   }
 
-  RENDERIZAR();
-};
+  handleDeleteOptions() {
+    this.setState(() => {
+      return {
+        options: []
+      };
+    });
+  }
 
-const RemoveAll = () => {
-  TITLES.OPTIONS = [];
-  RENDERIZAR();
-};
+  handlePick() {
+    const VALOR_ALEATORIO = Math.floor(Math.random() * this.state.options.length);
+    const VALOR_SELECIONADO = this.state.options[VALOR_ALEATORIO];
+    alert(VALOR_SELECIONADO);
+  }
 
-const DECIDIDO = () => {
-  const VALOR_ALEATORIO = Math.floor(Math.random() * TITLES.OPTIONS.length);
-  const OPCAO_SELECIONADA = TITLES.OPTIONS[VALOR_ALEATORIO];
-  alert(OPCAO_SELECIONADA);
-};
+  handleAddOption(OPCAO_NOVA) {
+    if (!OPCAO_NOVA) {
+      return 'Enter a valid value to add item!';
+    } else if (this.state.options.indexOf(OPCAO_NOVA) > -1) {
+      return 'This option already exists!';
+    } else {
+      this.setState(prevState => {
+        return {
+          options: prevState.options.concat([OPCAO_NOVA])
+        };
+      });
+    }
+  }
 
-const RENDERIZAR = () => {
-  const TEMPLATE = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, TITLES.MAIN), /*#__PURE__*/React.createElement("p", null, TITLES.SUB && TITLES.SUB), /*#__PURE__*/React.createElement("p", null, TITLES.OPTIONS.length > 0 ? "Here are your options" : "No options available"), /*#__PURE__*/React.createElement("button", {
-    disabled: TITLES.OPTIONS.length === 0,
-    onClick: DECIDIDO
-  }, "What Should I Do?"), /*#__PURE__*/React.createElement("button", {
-    onClick: RemoveAll
-  }, "Remove All"), /*#__PURE__*/React.createElement("ol", null, TITLES.OPTIONS.map(opcoes => {
-    return /*#__PURE__*/React.createElement("li", {
-      key: opcoes
-    }, "Op\xE7\xE3o: ", opcoes);
-  })), /*#__PURE__*/React.createElement("form", {
-    onSubmit: OnFormSubmit
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "text",
-    name: "option"
-  }), /*#__PURE__*/React.createElement("button", null, "Add Option")));
-  ReactDOM.render(TEMPLATE, APP_IP);
-};
+  render() {
+    const title = "Indecision App";
+    const subtitle = "Put your life in the hands of the computer";
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
+      title: title,
+      subtitle: subtitle
+    }), /*#__PURE__*/React.createElement(Action, {
+      hasOptions: this.state.options.length > 0,
+      handlePick: this.handlePick
+    }), /*#__PURE__*/React.createElement(Opcoes, {
+      options: this.state.options,
+      handleDeleteOptions: this.handleDeleteOptions
+    }), /*#__PURE__*/React.createElement(Maisopcoes, {
+      handleAddOption: this.handleAddOption
+    }));
+  }
 
-RENDERIZAR();
+}
+
+class Header extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, this.props.title), /*#__PURE__*/React.createElement("h2", null, this.props.subtitle));
+  }
+
+}
+
+class Action extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+      onClick: this.props.handlePick,
+      disabled: !this.props.hasOptions
+    }, "What should I do?"));
+  }
+
+}
+
+class Opcoes extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+      onClick: this.props.handleDeleteOptions
+    }, "Remove all"), this.props.options.map(element => /*#__PURE__*/React.createElement(Opcao, {
+      key: element,
+      MyOption: element
+    })), /*#__PURE__*/React.createElement(Opcao, null));
+  }
+
+}
+
+class Maisopcoes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.state = {
+      error: undefined
+    };
+  }
+
+  handleAddOption(e) {
+    e.preventDefault();
+    const OPCAO_NOVA = e.target.elements.option.value;
+    const error = this.props.handleAddOption(OPCAO_NOVA);
+    this.setState(() => {
+      return {
+        error: error
+      };
+    });
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, this.state.error && /*#__PURE__*/React.createElement("p", null, this.state.error), /*#__PURE__*/React.createElement("form", {
+      onSubmit: this.handleAddOption
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      name: "option"
+    }), /*#__PURE__*/React.createElement("button", null, "Add option")));
+  }
+
+}
+
+class Opcao extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement("div", null, this.props.MyOption);
+  }
+
+}
+
+ReactDOM.render( /*#__PURE__*/React.createElement(IndecisionApp, null), document.getElementById('app'));
