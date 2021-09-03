@@ -4,10 +4,9 @@
   "description": "Primeiro programa do curso base de React",
   "main": "index.js",
   "scripts": {
-    "react": "babel src --out-dir public/lib --presets=@babel/preset-react --watch",
-    "react-watch":"babel src --out-dir public/lib --presets=@babel/preset-react --watch",
-    "react-watch-playground":"babel src/playground --out-dir public/lib/playground --presets=@babel/preset-react --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "live-server public",
+    "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,13 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.9",
-    "@babel/preset-react": "^7.14.5"
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "live-server": "^1.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.1.0"
   }
 }
