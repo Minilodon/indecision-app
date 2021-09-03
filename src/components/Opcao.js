@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Opcao = (props) => {
-    return (
+const Opcao = (props) => (
         <div>
             {props.MyOption}
 
@@ -15,6 +14,6 @@ const Opcao = (props) => {
             
         </div>
     );
-};
+
 
 export default Opcao;

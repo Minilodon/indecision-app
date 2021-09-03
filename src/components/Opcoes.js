@@ -1,8 +1,7 @@
 import React from 'react';
 import Opcao from './Opcao';
 
-const Opcoes = (props) => {
-    return (
+const Opcoes = (props) => (
         <div>
             <button onClick={props.handleDeleteOptions}>Remove all</button>
             {props.options.length === 0 && <p>Please add an option to get started!</p>}
@@ -18,6 +17,5 @@ const Opcoes = (props) => {
             <Opcao />
         </div>
     );
-};
 
 export default Opcoes;
