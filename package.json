@@ -1,16 +1,16 @@
 {
-  "name": "indecision-app",
+  "name": "expensify-app",
   "version": "1.0.0",
-  "description": "Primeiro programa do curso base de React",
+  "description": "Segundo programa do curso base de React",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "live-server public",
+    "server": "webpack serve --open",
     "build": "webpack --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Minilodon/indecision-app.git"
+    "url": "git+https://github.com/Minilodon/expensify-app.git"
   },
   "keywords": [
     "React",
@@ -36,10 +36,11 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
+    "react-router-dom": "^5.3.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.1.0"
+    "webpack-dev-server": "^4.2.1"
   }
 }
